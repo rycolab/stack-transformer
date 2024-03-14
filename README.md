@@ -13,6 +13,7 @@ pip install -r requirements.txt
 ```
 
 ## Deterministic Context-Free Tasks
+This part of the code is adapted from [neural_networks_chomsky_hierarchy](https://github.com/google-deepmind/neural_networks_chomsky_hierarchy/tree/main).
 ```
 cd neural_networks_chomsky_hierarchy/
 python training/example.py \
