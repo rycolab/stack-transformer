@@ -15,21 +15,22 @@
 
 """Builders for RNN/LSTM cores."""
 
-from typing import Callable, Any, Type
+from typing import Any, Callable
 
 import haiku as hk
 import jax.nn as jnn
 import jax.numpy as jnp
 
-from neural_networks_chomsky_hierarchy.models import tape_rnn, attention_rnn, stack_attention_rnn
+from neural_networks_chomsky_hierarchy.models import tape_rnn
 
 
 def make_rnn(
     output_size: int,
-    rnn_core: Type[hk.RNNCore],
+    rnn_core: type[hk.RNNCore],
     return_all_outputs: bool = False,
     input_window: int = 1,
-    **rnn_kwargs: Any) -> Callable[[jnp.ndarray], jnp.ndarray]:
+    **rnn_kwargs: Any
+) -> Callable[[jnp.ndarray], jnp.ndarray]:
   """Returns an RNN model, not haiku transformed.
 
   Only the last output in the sequence is returned. A linear layer is added to
@@ -61,14 +62,9 @@ def make_rnn(
         (batch_size, new_seq_length // input_window, input_window, embed_size))
 
     x = hk.Flatten(preserve_dims=2)(x)
-    # if issubclass(rnn_core, attention_rnn.AttentionRNNCore) or issubclass(rnn_core, attention_rnn.RecurrentAttentionRNNCore) or issubclass(rnn_core, stack_attention_rnn.StackAttentionRNNCore) and not core._dynamic:
-    #   output, _ = hk.static_unroll(
-    #       core, x, initial_state, time_major=False)
-    # else:
-    #   output, _ = hk.dynamic_unroll(
-    #       core, x, initial_state, time_major=False, return_all_states=True)
-    output, _ = hk.static_unroll(
-        core, x, initial_state, time_major=False)
+
+    output, _ = hk.dynamic_unroll(
+        core, x, initial_state, time_major=False, return_all_states=True)
     output = jnp.reshape(output, (batch_size, new_seq_length, output.shape[-1]))
 
     if not return_all_outputs:

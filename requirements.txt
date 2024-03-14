@@ -1,4 +1,7 @@
-jax
+# DCF
+jax==0.4.16
+jaxlib==0.4.16+cuda11.cudnn86
+flax=0.7.0
 dm-haiku
 numpy
 optax
@@ -6,3 +9,10 @@ tqdm
 git+https://github.com/deepmind/einshape
 dm-tree
 absl-py
+
+# LM
+torch==2.0.1+cu118
+transformers
+datasets
+accelerate
+evaluate

@@ -31,7 +31,6 @@ import tqdm
 from neural_networks_chomsky_hierarchy.tasks import task as task_lib
 from neural_networks_chomsky_hierarchy.training import curriculum as curriculum_lib
 from neural_networks_chomsky_hierarchy.training import range_evaluation
-from neural_networks_chomsky_hierarchy.training.utils import save
 
 
 _LossMetrics = Optional[Mapping[str, jnp.ndarray]]
