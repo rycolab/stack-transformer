@@ -1,5 +1,5 @@
 # stack-transformer
-This repository is in accompany with the paper: [A Transformer Encoder with Stack Attention]().
+This repository is in accompany with the paper: [A Transformer with Stack Attention]().
 
 ## Dependencies
 - python 3.11.2
